@@ -1,9 +1,14 @@
 import java.io.IOException;
 
-public class main {
+public class Main {
+
     private static boolean stop = false;
+    private static WorkingThread workingThread;
+
     public static void main(String[] args) throws IOException {
         String command;
+        workingThread = new WorkingThread("192.168.1.1", 1000);
+        workingThread.start();
         while(!stop){
             command = readCommand();
             switch(command){
@@ -11,6 +16,7 @@ public class main {
                     System.out.println("Hello World");
                     break;
                 case "stop":
+                    workingThread.quit();
                     stop = true;
                     break;
                 default:
